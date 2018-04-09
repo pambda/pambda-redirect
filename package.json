@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "caseless-get": "0.0.3",
+    "lambda-callbackify": "0.0.1",
     "lambda-console": "0.0.1"
   },
   "devDependencies": {
