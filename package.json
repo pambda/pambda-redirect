@@ -7,7 +7,6 @@
     "url": "https://github.com/pambda/pambda-redirect/issues"
   },
   "dependencies": {
-    "caseless-get": "0.0.3",
     "lambda-callbackify": "0.0.1",
     "lambda-console": "0.0.1"
   },
