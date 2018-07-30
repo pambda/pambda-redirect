@@ -39,7 +39,7 @@ This pambda add the `redirect` function to `context`.
 - `options`
     - Reserved.
 
-## context.redirect([statusCode,] url)
+## context.redirect([statusCode,] url[, options])
 
 The function for specifying a redirect to be added to `context`.
 
@@ -50,6 +50,9 @@ Since this function calls a callback of Lambda internally, it is not necessary f
     - If omitted, the default is 302.
 - `url`
     - The redirect path or URL.
+- `options.param`
+    - A name of a query parameter that is added to the redirect URL for passing an url of a current resource.
+    - If this option is `true`, `return_to` is used as a default name.
 
 ## License
 

@@ -15,8 +15,11 @@ exports.handler = createLambda(
     redirect(),
 
     combineByPath({
-      '/redirect1': next => (event, context, callback) => {
+      '/redirect': next => (event, context, callback) => {
         context.redirect('/');
+      },
+      '/redirect-with-return-to': next => (event, context, callback) => {
+        context.redirect('/', { param: true });
       },
     }),
 

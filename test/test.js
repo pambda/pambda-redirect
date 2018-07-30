@@ -87,3 +87,32 @@ test('normalize accessing to a root resource', t => {
     t.equal(result.headers.Location, '/Stage/');
   });
 });
+
+test('redirect to a path with return_to param', t => {
+  t.plan(3);
+
+  const pambda = redirect();
+
+  const lambda = pambda((event, context, callback) => {
+    context.redirect('/login', { param: true });
+  });
+
+  const event = {
+    path: '/',
+    headers: {
+      host: 'example.com',
+    },
+    requestContext: {
+      path: '/',
+      stage: 'Prod',
+    },
+  };
+
+  lambda(event, {}, (err, result) => {
+    t.error(err);
+
+    t.equal(result.statusCode, 302);
+    t.equal(result.headers.Location, '/login?return_to=https%3A%2F%2Fexample.com%2F');
+  });
+});
+
