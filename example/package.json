@@ -1,0 +1,25 @@
+{
+  "name": "pambda-redirect-example",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "lambda-console": "0.0.2",
+    "pambda": "0.0.4",
+    "pambda-404": "0.0.2",
+    "pambda-binary-support": "0.0.6",
+    "pambda-errorhandler": "^0.1.0",
+    "pambda-path": "0.0.2",
+    "pambda-redirect": "file:../pambda-redirect-0.0.3.tgz",
+    "pambda-serve-static": "0.0.5"
+  },
+  "devDependencies": {
+    "api-gateway-local": "^0.2.5",
+    "aws-sdk": "^2.283.1",
+    "cfn-package": "^0.1.2"
+  },
+  "scripts": {
+    "predeploy": "cfn-package --template-file template.yaml --output-template-file output-template.yaml --s3-bucket node-tmp",
+    "deploy": "aws cloudformation deploy --stack-name pambda-redirect-example-lj7ng8v9enh --template-file output-template.yaml --capabilities CAPABILITY_NAMED_IAM",
+    "start": "api-gateway-local start -r us-west-2 --template-file template.yaml"
+  }
+}
