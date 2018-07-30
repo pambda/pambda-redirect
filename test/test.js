@@ -28,7 +28,7 @@ test('redirect to a path in a custom domain', t => {
     t.error(err);
 
     t.equal(result.statusCode, 302);
-    t.ok(result.headers.Location, '/login');
+    t.equal(result.headers.Location, '/login');
   });
 });
 
@@ -56,7 +56,7 @@ test('redirect to a path in an api gateway domain', t => {
     t.error(err);
 
     t.equal(result.statusCode, 302);
-    t.ok(result.headers.Location, '/Stage/login');
+    t.equal(result.headers.Location, '/Stage/login');
   });
 });
 
@@ -84,6 +84,6 @@ test('normalize accessing to a root resource', t => {
     t.error(err);
 
     t.equal(result.statusCode, 301);
-    t.ok(result.headers.Location, '/Stage/');
+    t.equal(result.headers.Location, '/Stage/');
   });
 });
