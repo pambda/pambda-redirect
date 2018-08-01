@@ -2,7 +2,10 @@ const test = require('tape');
 
 process.env.AWS_REGION = 'us-west-2';
 
-const { redirect } = require('..');
+const {
+  makeRedirector,
+  redirect,
+} = require('..');
 
 test('redirect to a path in a custom domain', t => {
   t.plan(3);
@@ -116,3 +119,30 @@ test('redirect to a path with return_to param', t => {
   });
 });
 
+test('test makeRedirector', t => {
+  t.plan(3);
+
+  const pambda = makeRedirector(301, 'https://test.example.com');
+
+  const lambda = pambda((event, context, callback) => {
+    throw 'A sequent pambda must not be called';
+  });
+
+  const event = {
+    path: '/',
+    headers: {
+      host: 'example.com',
+    },
+    requestContext: {
+      path: '/',
+      stage: 'Prod',
+    },
+  };
+
+  lambda(event, {}, (err, result) => {
+    t.error(err);
+
+    t.equal(result.statusCode, 301);
+    t.equal(result.headers.Location, 'https://test.example.com');
+  });
+});

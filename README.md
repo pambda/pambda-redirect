@@ -5,7 +5,7 @@
 ## Installation
 
 ```
-npm i pambda-redirect -S
+npm i pambda-redirect
 ```
 
 ## Usage
@@ -44,6 +44,19 @@ This pambda add the `redirect` function to `context`.
 The function for specifying a redirect to be added to `context`.
 
 Since this function calls a callback of Lambda internally, it is not necessary for the caller of this function to call the callback.
+
+- `statusCode`
+    - HTTP status code when redirecting.
+    - If omitted, the default is 302.
+- `url`
+    - The redirect path or URL.
+- `options.param`
+    - A name of a query parameter that is added to the redirect URL for passing an url of a current resource.
+    - If this option is `true`, `return_to` is used as a default name.
+
+## makeRedicrector([statusCode,] url[, options])
+
+Generate a pambda to redirect a specified url always.
 
 - `statusCode`
     - HTTP status code when redirecting.
