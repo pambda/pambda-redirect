@@ -10,7 +10,11 @@ const {
 test('redirect to a path in a custom domain', t => {
   t.plan(3);
 
-  const pambda = redirect();
+  const pambda = redirect({
+    basePathMap: {
+      'example.com': '/',
+    },
+  });
 
   const lambda = pambda((event, context, callback) => {
     context.redirect('/login');
@@ -51,6 +55,34 @@ test('redirect to a path in an api gateway domain', t => {
     },
     requestContext: {
       path: '/Stage/',
+      stage: 'Stage',
+    },
+  };
+
+  lambda(event, {}, (err, result) => {
+    t.error(err);
+
+    t.equal(result.statusCode, 302);
+    t.equal(result.headers.Location, '/Stage/login');
+  });
+});
+
+test('redirect from a path with path parameters', t => {
+  t.plan(3);
+
+  const pambda = redirect();
+
+  const lambda = pambda((event, context, callback) => {
+    context.redirect('/login');
+  });
+
+  const event = {
+    path: '/test',
+    headers: {
+      host: '0123456789.execute-api.us-west-2.amazonaws.com',
+    },
+    requestContext: {
+      path: '/Stage/{params+}',
       stage: 'Stage',
     },
   };
@@ -115,7 +147,7 @@ test('redirect to a path with return_to param', t => {
     t.error(err);
 
     t.equal(result.statusCode, 302);
-    t.equal(result.headers.Location, '/login?return_to=https%3A%2F%2Fexample.com%2F');
+    t.equal(result.headers.Location, '/Prod/login?return_to=https%3A%2F%2Fexample.com%2F');
   });
 });
 
