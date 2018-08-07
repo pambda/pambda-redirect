@@ -61,6 +61,8 @@ Since this function calls a callback of Lambda internally, it is not necessary f
     - An object for getting a base path from a custom domain.
       This object has keys representing custom domains, and values representing base paths.
     - If a custom domain not found in this object, a stage name is used as a base path.
+- `options.headers`
+    - An object that has additional headers for responses.
 
 ## makeRedicrector([statusCode,] url[, options])
 
@@ -78,6 +80,8 @@ Generate a pambda to redirect a specified url always.
     - An object for getting a base path from a custom domain.
       This object has keys representing custom domains, and values representing base paths.
     - If a custom domain not found in this object, a stage name is used as a base path.
+- `options.headers`
+    - An object that has additional headers for responses.
 
 ## License
 

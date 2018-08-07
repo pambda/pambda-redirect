@@ -123,13 +123,18 @@ test('normalize accessing to a root resource', t => {
   });
 });
 
-test('redirect to a path with return_to param', t => {
-  t.plan(3);
+test('redirect to a path with return_to param and headers', t => {
+  t.plan(4);
 
   const pambda = redirect();
 
   const lambda = pambda((event, context, callback) => {
-    context.redirect('/login', { param: true });
+    context.redirect('/login', {
+      param: true,
+      headers: {
+        'x-custom': 'test',
+      }
+    });
   });
 
   const event = {
@@ -148,6 +153,7 @@ test('redirect to a path with return_to param', t => {
 
     t.equal(result.statusCode, 302);
     t.equal(result.headers.Location, '/Prod/login?return_to=https%3A%2F%2Fexample.com%2F');
+    t.equal(result.headers['x-custom'], 'test');
   });
 });
 
