@@ -152,7 +152,7 @@ test('redirect to a path with return_to param and headers', t => {
     t.error(err);
 
     t.equal(result.statusCode, 302);
-    t.equal(result.headers.Location, '/Prod/login?return_to=https%3A%2F%2Fexample.com%2F');
+    t.equal(result.headers.Location, '/login?return_to=https%3A%2F%2Fexample.com%2F');
     t.equal(result.headers['x-custom'], 'test');
   });
 });
