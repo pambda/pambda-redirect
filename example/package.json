@@ -9,7 +9,7 @@
     "pambda-binary-support": "0.0.6",
     "pambda-errorhandler": "^0.1.0",
     "pambda-path": "0.0.2",
-    "pambda-redirect": "file:../pambda-redirect-0.0.3.tgz",
+    "pambda-redirect": "file:../pambda-redirect-0.1.0.tgz",
     "pambda-serve-static": "0.0.5"
   },
   "devDependencies": {
